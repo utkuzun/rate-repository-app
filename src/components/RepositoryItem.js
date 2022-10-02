@@ -42,7 +42,7 @@ const RepositoryItem = ({ repoItem }) => {
     },
 
     buttonText: {
-      color: '#fff',
+      color: theme.colors.buttonColor,
       fontWeight: theme.fontWeights.bold,
     },
   })
