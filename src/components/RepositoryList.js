@@ -8,8 +8,6 @@ const styles = StyleSheet.create({
 })
 
 const renderRepoItem = ({ item }) => {
-  //   const { ownerAvatarUrl, ...selectedItems } = item
-
   return <RepositoryItem repoItem={item} />
 }
 
