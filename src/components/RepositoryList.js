@@ -22,7 +22,7 @@ const RepositoryList = () => {
 
   // const { repositories } = useRepositories(reposUrl)
 
-  const { data, loading, error } = useQuery(GET_REPOSITORIES, {
+  const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
   })
 
