@@ -27,7 +27,6 @@ const SignIn = () => {
     >
       {({ handleSubmit }) => <SignInForm onSumbit={handleSubmit} />}
     </Formik>
-    // <Text>mal ahmet</Text>
   )
 }
 

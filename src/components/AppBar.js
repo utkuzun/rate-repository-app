@@ -1,6 +1,8 @@
-import { ScrollView, View, StyleSheet, Text } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import { Link } from 'react-router-native'
 import Constants from 'expo-constants'
+
+import Text from './Text'
 
 import theme from '../theme'
 

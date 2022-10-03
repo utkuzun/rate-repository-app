@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native'
-
+import { View, Image, Pressable, StyleSheet } from 'react-native'
+import Text from './Text'
 import StatList from './StatList'
 import theme from '../theme'
 
