@@ -5,6 +5,22 @@ import { useNavigate } from 'react-router-native'
 
 import * as yup from 'yup'
 
+export const SignInContainer = ({
+  onSubmit,
+  initialValues,
+  validationSchema,
+}) => {
+  return (
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    >
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
+  )
+}
+
 const SignIn = () => {
   const { signIn } = useSignIn()
   const navigate = useNavigate()
@@ -30,13 +46,11 @@ const SignIn = () => {
   }
 
   return (
-    <Formik
+    <SignInContainer
       onSubmit={onSubmit}
       initialValues={initialValues}
       validationSchema={validationSchema}
-    >
-      {({ handleSubmit }) => <SignInForm onSumbit={handleSubmit} />}
-    </Formik>
+    />
   )
 }
 

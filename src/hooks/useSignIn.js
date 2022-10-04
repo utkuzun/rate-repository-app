@@ -7,7 +7,7 @@ const useSignIn = () => {
   const authStroge = useAuthStorage()
   const client = useApolloClient()
 
-  const [mutate, result] = useMutation(AUTHENTICATE)
+  const [mutate, { data, loading }] = useMutation(AUTHENTICATE)
 
   const signIn = async ({ username, password }) => {
     await mutate({
@@ -19,14 +19,16 @@ const useSignIn = () => {
       },
     })
 
-    const {
-      authenticate: { accessToken },
-    } = result.data ? result.data : null
-    accessToken && (await authStroge.setAccessToken(accessToken))
-    client.resetStore()
+    if (!loading && data) {
+      const {
+        authenticate: { accessToken },
+      } = data
+      accessToken && (await authStroge.setAccessToken(accessToken))
+      client.resetStore()
+    }
   }
 
-  return { signIn, result }
+  return { signIn }
 }
 
 export default useSignIn

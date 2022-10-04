@@ -17,6 +17,23 @@ const renderRepoItem = ({ item }) => {
 
 const ItemSeparator = () => <View style={styles.separator} />
 
+export const RepositoryListContainer = ({ repositories }) => {
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : []
+
+  return (
+    <View>
+      <FlatList
+        data={repositoryNodes}
+        renderItem={renderRepoItem}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={ItemSeparator}
+      />
+    </View>
+  )
+}
+
 const RepositoryList = () => {
   // const reposUrl = 'http://192.168.97.39:5000/api/repositories'
 
@@ -30,20 +47,7 @@ const RepositoryList = () => {
     return null
   }
 
-  const repositoryNodes = data
-    ? data.repositories.edges.map((edge) => edge.node)
-    : []
-
-  return (
-    <View>
-      <FlatList
-        data={repositoryNodes}
-        renderItem={renderRepoItem}
-        keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={ItemSeparator}
-      />
-    </View>
-  )
+  return <RepositoryListContainer repositories={data.repositories} />
 }
 
 export default RepositoryList

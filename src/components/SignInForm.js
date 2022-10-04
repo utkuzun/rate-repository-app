@@ -4,7 +4,7 @@ import FormikTextInput from './FormikTextInput'
 
 import theme from '../theme'
 
-const SignInForm = ({ onSumbit }) => {
+const SignInForm = ({ onSubmit }) => {
   const styles = StyleSheet.create({
     container: {
       padding: 15,
@@ -31,7 +31,7 @@ const SignInForm = ({ onSumbit }) => {
       <FormikTextInput placeholder='Username' name='username' />
       <FormikTextInput placeholder='Password' name='password' secureTextEntry />
 
-      <Pressable onPress={onSumbit} style={styles.button}>
+      <Pressable onPress={onSubmit} style={styles.button}>
         <Text style={styles.buttonText}>Sign In</Text>
       </Pressable>
     </View>
