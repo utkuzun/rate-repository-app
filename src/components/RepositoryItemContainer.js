@@ -2,7 +2,7 @@ import { View, Image, Pressable, StyleSheet } from 'react-native'
 import Text from './Text'
 import StatList from './StatList'
 import theme from '../theme'
-// import * as Linking from 'expo-linking'
+import * as Linking from 'expo-linking'
 
 const styles = StyleSheet.create({
   container: {
@@ -84,7 +84,7 @@ const RepositoryItemContainer = ({ repoItem, showUrl }) => {
       {showUrl && (
         <Pressable
           style={[styles.infoText, styles.button]}
-          // onPress={() => Linking.openURL(url)}
+          onPress={() => Linking.openURL(url)}
         >
           <Text style={styles.buttonText}>Open In GitHub</Text>
         </Pressable>
