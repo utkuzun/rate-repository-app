@@ -1,5 +1,5 @@
 import { ScrollView, View, StyleSheet, Pressable } from 'react-native'
-import { Link } from 'react-router-native'
+import { Link, useNavigate } from 'react-router-native'
 import Constants from 'expo-constants'
 
 import { useQuery, useApolloClient } from '@apollo/client'
@@ -40,6 +40,7 @@ const AppBar = () => {
   const { data, loading } = useQuery(CURRENT_USER)
   const authStroge = useAuthStorage()
   const client = useApolloClient()
+  const navigate = useNavigate()
 
   if (loading) {
     return null
@@ -61,9 +62,14 @@ const AppBar = () => {
             <Text style={[styles.text, styles.link]}>Sign in</Text>
           </Link>
         ) : (
-          <Pressable onPress={signout}>
-            <Text style={[styles.text, styles.link]}>Sign Out</Text>
-          </Pressable>
+          <>
+            <Pressable onPress={() => navigate('/reviews/create')}>
+              <Text style={[styles.text, styles.link]}>Create a review</Text>
+            </Pressable>
+            <Pressable onPress={signout}>
+              <Text style={[styles.text, styles.link]}>Sign out</Text>
+            </Pressable>
+          </>
         )}
       </ScrollView>
     </View>

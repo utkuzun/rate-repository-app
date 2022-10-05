@@ -13,3 +13,26 @@ export const AUTHENTICATE = gql`
     }
   }
 `
+
+export const CREATE_REVIEW = gql`
+  mutation CreateReview($review: CreateReviewInput) {
+    createReview(review: $review) {
+      id
+      user {
+        id
+        username
+      }
+      repository {
+        id
+        ownerName
+        fullName
+        reviewCount
+        ratingAverage
+        stargazersCount
+      }
+      text
+      createdAt
+      rating
+    }
+  }
+`
