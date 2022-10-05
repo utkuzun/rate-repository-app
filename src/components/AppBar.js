@@ -58,9 +58,14 @@ const AppBar = () => {
           <Text style={[styles.text, styles.link]}>Repositories</Text>
         </Link>
         {!data.me ? (
-          <Link to='/signin'>
-            <Text style={[styles.text, styles.link]}>Sign in</Text>
-          </Link>
+          <>
+            <Link to='/signin'>
+              <Text style={[styles.text, styles.link]}>Sign in</Text>
+            </Link>
+            <Link to='/signup'>
+              <Text style={[styles.text, styles.link]}>Sign up</Text>
+            </Link>
+          </>
         ) : (
           <>
             <Pressable onPress={() => navigate('/reviews/create')}>
