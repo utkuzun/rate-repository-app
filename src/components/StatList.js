@@ -3,12 +3,13 @@ import Statistic from './Statictis'
 
 const styles = StyleSheet.create({
   article: {
-    flexDirection: 'row',
     padding: 10,
   },
 
-  justifyEvenly: {
+  flatList: {
+    flexDirection: 'row',
     justifyContent: 'space-around',
+    flexGrow: 1,
   },
 })
 
@@ -18,9 +19,10 @@ const renderStat = ({ item }) => {
 
 const StatList = ({ stats }) => {
   return (
-    <View>
+    <View style={styles.article}>
       <FlatList
-        style={[styles.article, styles.justifyEvenly]}
+        contentContainerStyle={styles.flatList}
+        horizontal
         data={stats}
         renderItem={renderStat}
         keyExtractor={(item) => item.label}

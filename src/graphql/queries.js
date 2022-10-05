@@ -15,6 +15,7 @@ export const GET_REPOSITORIES = gql`
           ownerAvatarUrl
           language
           description
+          url
         }
       }
       totalCount
@@ -24,6 +25,23 @@ export const GET_REPOSITORIES = gql`
         startCursor
         endCursor
       }
+    }
+  }
+`
+
+export const GET_REPOSITORY = gql`
+  query Repository($repositoryId: ID!) {
+    repository(id: $repositoryId) {
+      id
+      fullName
+      ratingAverage
+      reviewCount
+      stargazersCount
+      forksCount
+      ownerAvatarUrl
+      description
+      language
+      url
     }
   }
 `
