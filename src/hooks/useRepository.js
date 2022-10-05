@@ -6,6 +6,7 @@ const useRepository = ({ id }) => {
     variables: { repositoryId: id },
     fetchPolicy: 'cache-and-network',
   })
+
   return { repoItem: data ? data.repository : undefined, loading }
 }
 
