@@ -98,7 +98,7 @@ const RepositoryList = () => {
   const { loading, repositories, fetchMore } = useRepositories({
     order,
     search: searchDebounced,
-    first: 5,
+    first: 8,
   })
 
   const onEndReached = () => {

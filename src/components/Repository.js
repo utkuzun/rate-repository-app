@@ -19,7 +19,7 @@ const renderItem = ({ item }) => {
 
 const Repository = () => {
   const { id } = useParams()
-  const { loading, repoItem, handleFetchMore } = useRepository({ id, first: 2 })
+  const { loading, repoItem, handleFetchMore } = useRepository({ id, first: 4 })
 
   if (loading) {
     return null
