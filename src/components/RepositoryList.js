@@ -1,6 +1,9 @@
 import { View, FlatList, StyleSheet } from 'react-native'
 import RepositoryItem from './RepositoryItem'
 import { Picker } from '@react-native-picker/picker'
+import { Searchbar } from 'react-native-paper'
+import { useDebounce } from 'use-debounce'
+
 import { useState } from 'react'
 
 import useRepositories from '../hooks/useRepositories'
@@ -21,25 +24,38 @@ const renderRepoItem = ({ item }) => {
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-const SelectMenu = ({ order, setOrder }) => {
+const SelectMenu = ({ order, setOrder, search, setSearch }) => {
   return (
-    <Picker
-      selectedValue={order}
-      onValueChange={(itemValue) => setOrder(itemValue)}
-    >
-      <Picker.Item
-        label='Select an item'
-        enabled={false}
-        style={styles.disabled}
+    <>
+      <Searchbar
+        placeholder='Search'
+        onChangeText={(query) => setSearch(query)}
+        value={search}
       />
-      <Picker.Item label='Latest repositories...' value='latest' />
-      <Picker.Item label='Highest rated repositories' value='highest' />
-      <Picker.Item label='Lowest rated repositories' value='least' />
-    </Picker>
+      <Picker
+        selectedValue={order}
+        onValueChange={(itemValue) => setOrder(itemValue)}
+      >
+        <Picker.Item
+          label='Select an item'
+          enabled={false}
+          style={styles.disabled}
+        />
+        <Picker.Item label='Latest repositories...' value='latest' />
+        <Picker.Item label='Highest rated repositories' value='highest' />
+        <Picker.Item label='Lowest rated repositories' value='least' />
+      </Picker>
+    </>
   )
 }
 
-export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
+export const RepositoryListContainer = ({
+  setSearch,
+  search,
+  repositories,
+  order,
+  setOrder,
+}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : []
@@ -47,7 +63,14 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
   return (
     <View>
       <FlatList
-        ListHeaderComponent={<SelectMenu order={order} setOrder={setOrder} />}
+        ListHeaderComponent={
+          <SelectMenu
+            search={search}
+            setSearch={setSearch}
+            order={order}
+            setOrder={setOrder}
+          />
+        }
         data={repositoryNodes}
         renderItem={renderRepoItem}
         keyExtractor={(item) => item.id}
@@ -58,8 +81,11 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
 }
 
 const RepositoryList = () => {
-  const [order, setOrder] = useState('ahmet')
-  const { loading, data } = useRepositories(order)
+  const [order, setOrder] = useState('latest')
+  const [search, setSearch] = useState('')
+  const [searchDebounced] = useDebounce(search, 500)
+
+  const { loading, data } = useRepositories({ order, search: searchDebounced })
 
   if (loading) {
     return null
@@ -70,6 +96,8 @@ const RepositoryList = () => {
       repositories={data.repositories}
       order={order}
       setOrder={setOrder}
+      search={search}
+      setSearch={setSearch}
     />
   )
 }
