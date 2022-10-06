@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
   disabled: {
     color: 'gray',
   },
+
+  searchInput: {
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
 })
 
 const renderRepoItem = ({ item }) => {
@@ -31,10 +36,12 @@ const SelectMenu = ({ order, setOrder, search, setSearch }) => {
         placeholder='Search'
         onChangeText={(query) => setSearch(query)}
         value={search}
+        style={styles.searchInput}
       />
       <Picker
         selectedValue={order}
         onValueChange={(itemValue) => setOrder(itemValue)}
+        style={styles.searchInput}
       >
         <Picker.Item
           label='Select an item'
