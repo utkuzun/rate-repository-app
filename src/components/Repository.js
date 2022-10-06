@@ -19,10 +19,15 @@ const renderItem = ({ item }) => {
 
 const Repository = () => {
   const { id } = useParams()
-  const { loading, repoItem } = useRepository({ id })
+  const { loading, repoItem, handleFetchMore } = useRepository({ id, first: 2 })
 
   if (loading) {
     return null
+  }
+
+  const onEndReached = () => {
+    console.log('review end reached')
+    handleFetchMore()
   }
 
   return (
@@ -31,6 +36,8 @@ const Repository = () => {
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparator}
       keyExtractor={(item) => item.node.id}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
       ListHeaderComponent={
         <RepositoryItemContainer repoItem={repoItem} showUrl={true} />
       }

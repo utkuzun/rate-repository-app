@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import theme from '../theme'
 import { parseDate } from '../utils/date'
 
-const Review = ({ review }) => {
+const Review = ({ review, repoName }) => {
   const { rating, text, createdAt, user } = review
   const { username } = user
 
@@ -60,7 +60,7 @@ const Review = ({ review }) => {
         </View>
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.infoHead}>{username}</Text>
+        <Text style={styles.infoHead}>{repoName || username}</Text>
         <Text style={styles.date}>{parseDate(createdAt)}</Text>
         <Text style={styles.infoText}>{text}</Text>
       </View>

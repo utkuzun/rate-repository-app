@@ -62,6 +62,7 @@ export const RepositoryListContainer = ({
   repositories,
   order,
   setOrder,
+  onEndReached,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -82,6 +83,8 @@ export const RepositoryListContainer = ({
         renderItem={renderRepoItem}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={ItemSeparator}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
       />
     </View>
   )
@@ -92,7 +95,15 @@ const RepositoryList = () => {
   const [search, setSearch] = useState('')
   const [searchDebounced] = useDebounce(search, 500)
 
-  const { loading, data } = useRepositories({ order, search: searchDebounced })
+  const { loading, repositories, fetchMore } = useRepositories({
+    order,
+    search: searchDebounced,
+    first: 5,
+  })
+
+  const onEndReached = () => {
+    fetchMore()
+  }
 
   if (loading) {
     return null
@@ -100,11 +111,12 @@ const RepositoryList = () => {
 
   return (
     <RepositoryListContainer
-      repositories={data.repositories}
+      repositories={repositories}
       order={order}
       setOrder={setOrder}
       search={search}
       setSearch={setSearch}
+      onEndReached={onEndReached}
     />
   )
 }

@@ -24,8 +24,12 @@ const styles = StyleSheet.create({
 
   infoField: {
     paddingHorizontal: 15,
-    flexGrow: 0,
     alignItems: 'flex-start',
+    flex: 0.8,
+  },
+
+  imageField: {
+    flex: 0.2,
   },
 
   infoText: {
@@ -72,7 +76,9 @@ const RepositoryItemContainer = ({ repoItem, showUrl }) => {
   return (
     <View style={styles.container}>
       <View style={styles.article}>
-        <Image style={styles.image} source={{ uri: ownerAvatarUrl }} />
+        <View style={styles.imageField}>
+          <Image style={styles.image} source={{ uri: ownerAvatarUrl }} />
+        </View>
         <View style={styles.infoField}>
           <Text style={[styles.infoHead, styles.infoText]}>{fullName}</Text>
           <Text style={styles.infoText}>{description}</Text>
