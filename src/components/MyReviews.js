@@ -11,9 +11,15 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-const MyReviewsContainer = ({ reviewNodes }) => {
+const MyReviewsContainer = ({ reviewNodes, refetch }) => {
   const renderItem = ({ item }) => {
-    return <Review review={item.node} repository={item.node.repository} />
+    return (
+      <Review
+        review={item.node}
+        repository={item.node.repository}
+        refetch={refetch}
+      />
+    )
   }
 
   return (
@@ -28,13 +34,15 @@ const MyReviewsContainer = ({ reviewNodes }) => {
 }
 
 const MyReviews = () => {
-  const { loading, data } = useCurrentUser({ includeReviews: true })
+  const { loading, data, refetch } = useCurrentUser({ includeReviews: true })
 
   if (loading) {
     return null
   }
 
-  return <MyReviewsContainer reviewNodes={data.me.reviews.edges} />
+  return (
+    <MyReviewsContainer reviewNodes={data.me.reviews.edges} refetch={refetch} />
+  )
 }
 
 export default MyReviews

@@ -5,7 +5,6 @@ const useAddReview = () => {
   const [mutate] = useMutation(CREATE_REVIEW)
 
   const addReview = async (values) => {
-    console.log({ review: { ...values } })
     const { data } = await mutate({
       variables: { review: { ...values, rating: Number(values.rating) } },
     })
