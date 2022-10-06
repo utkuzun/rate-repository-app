@@ -100,6 +100,7 @@ export const CURRENT_USER = gql`
             createdAt
             repository {
               fullName
+              id
             }
             user {
               id

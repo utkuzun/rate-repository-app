@@ -13,9 +13,7 @@ const ItemSeparator = () => <View style={styles.separator} />
 
 const MyReviewsContainer = ({ reviewNodes }) => {
   const renderItem = ({ item }) => {
-    return (
-      <Review review={item.node} repoName={item.node.repository.fullName} />
-    )
+    return <Review review={item.node} repository={item.node.repository} />
   }
 
   return (
